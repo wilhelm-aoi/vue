@@ -8,8 +8,11 @@ import axios from './axios/axios.js';
 import './mock/mock.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
-// 全局定义 axios
+
 const app = createApp(App);
+
+
+
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }

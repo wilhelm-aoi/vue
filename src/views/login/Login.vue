@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { reactive, ref,onBeforeMount,inject } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
-import util from '../util/pub-use.js';
-import axios from '../axios/axios.js';
-import router from '../router';
+import util from '../../util/pub-use.js';
+import axios from '../../axios/axios.js';
+import router from '../../router';
 const {getAssetsFile}= util
 // 定义组件名称
 defineOptions({

@@ -40,4 +40,7 @@ export default defineConfig({
     },
     assetsInlineLimit: 4096 * 500
   },
+  server:{
+    port:7000
+  }
 })

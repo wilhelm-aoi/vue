@@ -1,18 +1,39 @@
 <script setup>
 import {House, Menu, Fold, Expand, ArrowRight, ArrowDown} from "@element-plus/icons-vue";
-import { ref } from "vue";
+import {onMounted, ref} from "vue";
+import axios from "@/axios/axios";
+import router from "@/router";
 
 defineOptions({
   name: "home",
 });
 
 const isCollapse = ref(false);
+const tableData = ref([]);
+axios.get('/user/selectAll').then(res =>{
+  tableData.value=res.data
+    }
+)
+// onMounted(async () => {
+//   try {
+//     const response = await axios.get('/user/selectAll');
+//     tableData.value = response.data;
+//     console.log(tableData);
+//   } catch (error) {
+//     console.error('Request failed:', error);
+//   }
+// })
 
 const collapseIcon =ref('Fold');
 const handleCollapse = () => {
   isCollapse.value = !isCollapse.value;
   collapseIcon.value = isCollapse.value ? 'Expand' :'Fold'
 };
+
+const logout =()=>{
+  localStorage.removeItem('honey-user')
+  this.$router.push('/login2')
+}
 </script>
 
 <template>
@@ -92,7 +113,7 @@ const handleCollapse = () => {
               <el-dropdown-menu>
                 <el-dropdown-item>个人信息</el-dropdown-item>
                 <el-dropdown-item>修改密码</el-dropdown-item>
-                <el-dropdown-item>退出登录</el-dropdown-item>
+                <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
                 <el-dropdown-item disabled>Action 4</el-dropdown-item>
                 <el-dropdown-item divided>Action 5</el-dropdown-item>
               </el-dropdown-menu>
@@ -101,7 +122,20 @@ const handleCollapse = () => {
         </div>
       </el-header>
       <!-- 主体部分 -->
-      <el-main>主体部分</el-main>
+      <el-main>
+        <el-card style="width: 50%" >
+          <div slot="header" class="clearfix">
+            <span>渲染用户数据</span>
+          </div>
+          <el-table :data="tableData" style="width: 100%"  height="200px">
+            <el-table-column prop="id" label="id" />
+            <el-table-column prop="name" label="Name"  />
+            <el-table-column prop="username" label="userName" />
+            <el-table-column prop="password" label="Address" />
+          </el-table>
+        </el-card>
+
+      </el-main>
     </el-container>
   </el-container>
 </template>
