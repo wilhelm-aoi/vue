@@ -3,17 +3,14 @@ import {House, Menu, Fold, Expand, ArrowRight, ArrowDown} from "@element-plus/ic
 import {onMounted, ref} from "vue";
 import axios from "@/axios/axios";
 import router from "@/router";
-
+import { useRoute } from 'vue-router'
+const route = useRoute()
 defineOptions({
   name: "home",
 });
 
 const isCollapse = ref(false);
-const tableData = ref([]);
-axios.get('/user/selectAll').then(res =>{
-  tableData.value=res.data
-    }
-)
+
 // onMounted(async () => {
 //   try {
 //     const response = await axios.get('/user/selectAll');
@@ -52,39 +49,21 @@ const logout =()=>{
           text-color="rgba(255,255,255,0.65)"
           active-text-color="#fff"
           style="border: none"
-          default-active="1"
-          :default-openeds="['5']"
+          :default-active="route.path"
+          :default-openeds="['/home']"
       >
         <!-- 菜单项示例 -->
-        <el-menu-item index="1">
-          <el-icon><House /></el-icon>
-          <span>系统首页</span>
-        </el-menu-item>
-        <el-menu-item index="2">
-          <el-icon><House /></el-icon>
-          <span>系统首页</span>
-        </el-menu-item>
-        <el-menu-item index="3">
-          <el-icon><House /></el-icon>
-          <span>系统首页</span>
-        </el-menu-item>
-        <el-menu-item index="4">
+        <el-menu-item index="/home">
           <el-icon><House /></el-icon>
           <span>系统首页</span>
         </el-menu-item>
         <!-- 子菜单示例 -->
-        <el-sub-menu index="5">
+        <el-sub-menu index="info">
           <template #title>
             <el-icon><House /></el-icon>
-            <span>Navigator One</span>
+            <span>用户管理</span>
           </template>
-          <el-menu-item class="submenu" index="5-1">item one</el-menu-item>
-          <el-menu-item class="submenu" index="5-2">item two</el-menu-item>
-          <el-menu-item class="submenu" index="5-3">item three</el-menu-item>
-          <el-sub-menu  index="5-4">
-            <template #title>item four</template>
-            <el-menu-item class="submenu"  index="5-4-1">item one</el-menu-item>
-          </el-sub-menu>
+          <el-menu-item class="submenu" index="/user">用户信息</el-menu-item>
         </el-sub-menu>
       </el-menu>
     </el-aside>
@@ -123,18 +102,7 @@ const logout =()=>{
       </el-header>
       <!-- 主体部分 -->
       <el-main>
-        <el-card style="width: 50%" >
-          <div slot="header" class="clearfix">
-            <span>渲染用户数据</span>
-          </div>
-          <el-table :data="tableData" style="width: 100%"  height="200px">
-            <el-table-column prop="id" label="id" />
-            <el-table-column prop="name" label="Name"  />
-            <el-table-column prop="username" label="userName" />
-            <el-table-column prop="password" label="Address" />
-          </el-table>
-        </el-card>
-
+        <router-view/>
       </el-main>
     </el-container>
   </el-container>

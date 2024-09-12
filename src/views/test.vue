@@ -6,12 +6,14 @@ import router from '@/router';
 
 onMounted(async () => {
   try {
-    const res = await axios.get('http://localhost:9090/user/selectAll');
+    const res = await axios.get(this.$baseUrl +'/user/selectAll');
     console.log(res);
   } catch (error) {
     console.error('Request failed:', error);
   }
+  console.log(process.env.VUE_APP_BASEURL);
 });
+
 </script>
 
 

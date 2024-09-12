@@ -5,7 +5,7 @@ import { ElMessage } from 'element-plus'
 
 // 创建可一个新的axios对象
 const request = axios.create({
-    baseURL: 'http://localhost:9090',   // 后端的接口地址  ip:port
+    baseURL: import.meta.env.VITE_API_BASE_URL,  // 后端的接口地址  ip:port
     timeout: 30000
 })
 

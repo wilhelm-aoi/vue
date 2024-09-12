@@ -206,7 +206,7 @@ const login = () => {
           if (res.code === '200') {
             ElMessage.success(res.message)
             localStorage.setItem("honey-user",JSON.stringify(res.data)) // 存储用户数据
-            router.push('/home')
+            router.push('/manager')
           }else{
             ElMessage.error('用户名或密码错误');
           }
