@@ -53,7 +53,7 @@ const logout =()=>{
           :default-openeds="['/home']"
       >
         <!-- 菜单项示例 -->
-        <el-menu-item index="/home">
+        <el-menu-item index="/manager/home">
           <el-icon><House /></el-icon>
           <span>系统首页</span>
         </el-menu-item>
@@ -63,7 +63,7 @@ const logout =()=>{
             <el-icon><House /></el-icon>
             <span>用户管理</span>
           </template>
-          <el-menu-item class="submenu" index="/user">用户信息</el-menu-item>
+          <el-menu-item class="submenu" index="/manager/user">用户信息</el-menu-item>
         </el-sub-menu>
       </el-menu>
     </el-aside>

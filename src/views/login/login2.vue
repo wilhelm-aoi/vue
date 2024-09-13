@@ -123,6 +123,7 @@
   /* 水平居中 */
   align-items: center; padding: 10px;">
       ©2024 作者邮箱: wilhelmaoikoto@gmail.com
+      备案号：桂ICP备2023017425号-1
     </el-footer>
   </div>
 </template>
