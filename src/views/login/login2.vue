@@ -1,5 +1,6 @@
 <template>
-  <div style="height: 100vh;flex-direction: column; background: linear-gradient(to right, #6cd191, #9fc4e4); display: flex;">
+  <div
+      style="height: 100vh;flex-direction: column; background: linear-gradient(to right, #6cd191, #9fc4e4); display: flex;">
 
     <div class="box">
       <!-- 左侧展示部分 -->
@@ -48,7 +49,16 @@
                 :suffix-icon="Lock"
                 v-model="registerForm.confirmPassword"
             />
+
           </el-form-item>
+          <div  style="display: flex; justify-content: center;">
+            <el-form-item prop="role">
+              <el-radio-group v-model="registerForm.role">
+                <el-radio label="用户"></el-radio>
+                <el-radio label="商家"></el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </div>
         </el-form>
         <!-- 按钮盒子 -->
         <div class="btn-box">
@@ -103,7 +113,8 @@
                   </el-icon>
                 </template>
               </el-input>
-              <validCode style="flex-basis: 30%; flex-grow: 0; background-color: white" @update:value="getCode"></validCode>
+              <validCode style="flex-basis: 30%; flex-grow: 0; background-color: white"
+                         @update:value="getCode"></validCode>
             </div>
           </el-form-item>
 
@@ -122,7 +133,7 @@
     <el-footer style="text-align: center;
   /* 水平居中 */
   align-items: center; padding: 10px;">
-      ©2024 作者邮箱: wilhelmaoikoto@gmail.com
+      ©2024 作者邮箱: sujiaxin2003@qq.com
       备案号：桂ICP备2023017425号-1
     </el-footer>
   </div>
@@ -150,7 +161,8 @@ let code = reactive('')
 const registerForm = reactive({
   username: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
+  role: ''
 })
 
 const loginFormRef = ref('')
@@ -170,6 +182,9 @@ const rules = reactive({
   ],
   captcha: [
     {required: true, message: '请输入验证码', trigger: 'blur'},
+  ],
+  role: [
+    {required: true, message: '请选择角色', trigger: 'blur'},
   ],
 })
 const flag = ref(true);
@@ -206,13 +221,13 @@ const login = () => {
           console.log('login', res)
           if (res.code === '200') {
             ElMessage.success(res.message)
-            localStorage.setItem("honey-user",JSON.stringify(res.data)) // 存储用户数据
+            localStorage.setItem("honey-user", JSON.stringify(res.data)) // 存储用户数据
             router.push('/manager')
-          }else{
+          } else {
             ElMessage.error('用户名或密码错误');
           }
         })
-      }else{
+      } else {
         ElMessage.error('验证码错误');
       }
     }
@@ -222,19 +237,18 @@ const login = () => {
 const register = () => {
   registerFormRef.value.validate((valid) => {
     if (valid) {
-      if (registerForm.password === registerForm.confirmPassword)
-      {
-        axios.post("/register",registerForm).then(res => {
+      if (registerForm.password === registerForm.confirmPassword) {
+        axios.post("/register", registerForm).then(res => {
           console.log('register', res)
           if (res.code === 200) {
             ElMessage.success('注册成功')
-          }else{
+          } else {
             ElMessage.error(res.msg)
           }
         }).catch(error => {
           console.log(error);
         })
-      }else{
+      } else {
         ElMessage.error('请确认两次密码相同');
       }
 
@@ -399,6 +413,7 @@ const register = () => {
   border: 0;
   box-shadow: 0 0 0 0;
 }
+
 /* 输入框聚焦时的样式 */
 .el-input:focus {
   color: #b0cfe9; /* 聚焦时的字体颜色 */

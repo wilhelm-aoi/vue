@@ -20,6 +20,7 @@ const isCollapse = ref(false);
 //     console.error('Request failed:', error);
 //   }
 // })
+const user = JSON.parse(localStorage.getItem('honey-user') || '{}');
 
 const collapseIcon =ref('Fold');
 const handleCollapse = () => {
@@ -29,7 +30,7 @@ const handleCollapse = () => {
 
 const logout =()=>{
   localStorage.removeItem('honey-user')
-  this.$router.push('/login2')
+  router.push('/login2')
 }
 </script>
 
@@ -58,7 +59,7 @@ const logout =()=>{
           <span>系统首页</span>
         </el-menu-item>
         <!-- 子菜单示例 -->
-        <el-sub-menu index="info">
+        <el-sub-menu index="info" v-if="user.role === '管理员'">
           <template #title>
             <el-icon><House /></el-icon>
             <span>用户管理</span>
