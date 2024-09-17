@@ -240,8 +240,9 @@ const register = () => {
       if (registerForm.password === registerForm.confirmPassword) {
         axios.post("/register", registerForm).then(res => {
           console.log('register', res)
-          if (res.code === 200) {
+          if (res.code === '200') {
             ElMessage.success('注册成功')
+            mySwitch()
           } else {
             ElMessage.error(res.msg)
           }
