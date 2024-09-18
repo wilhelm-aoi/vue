@@ -33,8 +33,9 @@ const routes = [
         component: () => import('../views/error/403.vue')
       },
 
-      { path :"home",name:"home",component: () => import('../views/manager/home.vue')},
-      { path :"user",name:"user",component: () => import('../views/manager/user.vue')}
+      { path :"home",name:"home",meta:{ name:'系统首页'},component: () => import('../views/manager/home.vue')},
+      { path :"user",name:"user",meta:{ name:'用户信息'},component: () => import('../views/manager/user.vue')},
+      { path :"person",name:"person",meta:{ name:'个人主页'},component: () => import('../views/manager/person.vue')},
 
     ]
 

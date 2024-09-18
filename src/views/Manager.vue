@@ -77,21 +77,22 @@ const logout =()=>{
           <component :is="collapseIcon" />
         </el-icon>
         <el-breadcrumb :separator-icon="ArrowRight" style="margin-left:20px">
-          <el-breadcrumb-item :to="{ path: '/' }">user</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/' }">用户管理</el-breadcrumb-item>
-
+          <el-breadcrumb-item :to="{ path: '/manager/home' }">user</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: route.path }">{{route.meta.name}}</el-breadcrumb-item>
         </el-breadcrumb>
+
         <div style="flex:1;width:0;display: flex; align-items: center; justify-content:flex-end">
           <el-dropdown placement="bottom">
-            <span class="el-dropdown-link">
-              <el-icon class="el-icon--right">
-                <arrow-down />
-              </el-icon>
-              <span>管理员</span>
-            </span>
+            <div style="display: flex;align-content: center; cursor: default;outline: none; border: none;">
+              <el-image
+                  style="width: 40px; height: 40px;border-radius: 50%;margin: 0 5px;"
+                  :src="user.avatar" :fit="'cover'" />
+              <span style="align-content: center;color: #3636b9; text-decoration: underline;">{{user.name}}</span>
+            </div>
+
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item>个人信息</el-dropdown-item>
+                <el-dropdown-item @click.native="router.push('person')">个人信息</el-dropdown-item>
                 <el-dropdown-item>修改密码</el-dropdown-item>
                 <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
                 <el-dropdown-item disabled>Action 4</el-dropdown-item>
@@ -136,7 +137,7 @@ const logout =()=>{
 
 /* 菜单项悬停样式 */
 .el-menu-item:hover,
-::v-deep .el-sub-menu__title:hover {
+/deep/ .el-sub-menu__title:hover {
   color: #fff !important;
   background-color: #001529 !important;
   font-weight: bold;
@@ -144,7 +145,7 @@ const logout =()=>{
 
 /* el-icon的hover效果 */
 .el-menu-item:hover .el-icon,
-::v-deep .el-sub-menu__title:hover .el-icon {
+/deep/ .el-sub-menu__title:hover .el-icon {
   color: #fff !important;
 }
 

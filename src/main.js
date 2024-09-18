@@ -5,7 +5,6 @@ import router from './router';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import axios from './axios/axios.js';
-import './mock/mock.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 

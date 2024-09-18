@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted,ref} from 'vue';
+import { onMounted, ref} from 'vue';
 import util from '@/util/pub-use.js';
 import axios from '@/axios/axios';
 import router from '@/router';
@@ -13,6 +13,11 @@ const handleFileUpload = (response, file, fileList) => {
   console.log('上传的文件:', file);
   console.log('当前文件列表:', fileList);
 };
+const handleError = (response, file, fileList)=>{
+  console.log('上传成功的响应:', response);
+  console.log('上传的文件:', file);
+  console.log('当前文件列表:', fileList);
+}
 </script>
 
 
@@ -28,6 +33,7 @@ const handleFileUpload = (response, file, fileList) => {
             action="http://localhost:9090/file/upload"
             :headers="{token:user.token}"
             :on-success="handleFileUpload"
+            :on-error="handleError"
             list-type="picture"
         >
           <el-button size="small" type="primary">点击上传</el-button>

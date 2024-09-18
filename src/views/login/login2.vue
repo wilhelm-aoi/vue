@@ -220,7 +220,7 @@ const login = () => {
         axios.post('/login', loginData).then(res => {
           console.log('login', res)
           if (res.code === '200') {
-            ElMessage.success(res.message)
+            ElMessage.success('登录成功')
             localStorage.setItem("honey-user", JSON.stringify(res.data)) // 存储用户数据
             router.push('/manager')
           } else {
