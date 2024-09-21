@@ -5,7 +5,6 @@ import axios from '@/axios/axios';
 import router from '@/router';
 
 
-
 const user = JSON.parse(localStorage.getItem('honey-user') || '{}');
 // 定义上传成功后的处理函数
 const handleFileUpload = (response, file, fileList) => {
@@ -30,7 +29,7 @@ const handleError = (response, file, fileList)=>{
       <div>
         <el-upload
             class="avatar-uploader"
-            action="http://localhost:9090/file/upload"
+            action="${import.meta.env.VITE_API_BASE_URL}/file/upload"
             :headers="{token:user.token}"
             :on-success="handleFileUpload"
             :on-error="handleError"

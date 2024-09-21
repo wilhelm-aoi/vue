@@ -1,6 +1,5 @@
 <template>
-  <div
-      style="height: 100vh;flex-direction: column; background: linear-gradient(to right, #6cd191, #9fc4e4); display: flex;">
+  <div style="height: 100vh;flex-direction: column; background: linear-gradient(to right, #6cd191, #9fc4e4); display: flex;">
 
     <div class="box">
       <!-- 左侧展示部分 -->
@@ -51,11 +50,11 @@
             />
 
           </el-form-item>
-          <div  style="display: flex; justify-content: center;">
-            <el-form-item prop="role">
+          <div style="display: flex; justify-content: center;">
+            <el-form-item v-model="registerForm.role">
               <el-radio-group v-model="registerForm.role">
-                <el-radio label="用户"></el-radio>
-                <el-radio label="商家"></el-radio>
+                <el-radio value="用户">用户</el-radio>
+                <el-radio value="商家">商家</el-radio>
               </el-radio-group>
             </el-form-item>
           </div>
@@ -122,13 +121,45 @@
         </el-form>
         <!-- 按钮盒子 -->
         <div class="btn-box">
-          <el-button style="display:flex;justify-content: center;height: 40px ;align-items: center;" @click="login">登录
-          </el-button>
+          <el-button style="height: 40px" @click="login">登录</el-button>
+          <el-button style="height: 40px" text @click="dialogVisible = true">忘记密码</el-button>
           <!-- 绑定点击事件 -->
           <p @click="mySwitch">没有账号?去注册</p>
         </div>
+
+
+          <el-dialog
+              v-model="dialogVisible"
+              title="重置密码"
+              width="40%"
+          >
+            <el-form :model="loginForm" label-width="80px"
+                     style="padding-right: 20px;">
+              <el-form-item label="用户名">
+                <el-input v-model="loginForm.username" placeholder=""></el-input>
+              </el-form-item>
+              <el-form-item label="手机号">
+                <el-input type="text" v-model="loginForm.phone" placeholder="注册手机号"></el-input>
+              </el-form-item>
+              <el-form-item label="新密码" >
+                <el-input type="text" v-model="loginForm.newPassword" placeholder="6-15个字符"></el-input>
+              </el-form-item>
+              <el-form-item label="确认密码" >
+                <el-input type="password" v-model="loginForm.confirmPassword"  placeholder="6-15个字符"></el-input>
+              </el-form-item>
+            </el-form>
+
+
+            <template #footer>
+      <span class="dialog-footer">
+        <el-button type="primary" @click="reset">确认</el-button>
+        <el-button @click="dialogVisible = false">取消</el-button>
+      </span>
+            </template>
+          </el-dialog>
+        </div>
       </div>
-    </div>
+
 
     <el-footer style="text-align: center;
   /* 水平居中 */
@@ -138,6 +169,7 @@
     </el-footer>
   </div>
 </template>
+
 
 <script setup>
 
@@ -152,41 +184,56 @@ import {onMounted} from '@vue/runtime-core'
 import util from "@/util/pub-use";
 import ValidCode from "@/components/Vaildcode.vue";
 
+const dialogVisible = ref(false)
 const loginForm = reactive({
   username: '',
   password: '',
   captcha: '',
+  phone:'',
+  newPassword:'',
+  confirmPassword:''
 })
-let code = reactive('')
+let code = ref('')
 const registerForm = reactive({
   username: '',
   password: '',
   confirmPassword: '',
-  role: ''
+  role: '用户'
 })
+const reset =()=>{
+  if (loginForm.newPassword === loginForm.confirmPassword) {
+    const newUser={
+      username:loginForm.username,
+      password:loginForm.newPassword,
+      phone:loginForm.phone,
+    }
+    axios.put("/password", newUser).then(res => {
+      if (res.code === '200') {
+        ElMessage.success('密码更新成功')
+      } else {
+        ElMessage.error(res.msg)
+      }
+    })
+  } else {
+    ElMessage.error('请确认两次密码相同')
+  }
 
+  dialogVisible.value = false;
+}
 const loginFormRef = ref('')
 const registerFormRef = ref('')
-const rules = reactive({
+const rules = {
   username: [
-    {required: true, message: '请输入用户名', trigger: 'blur'},
-
-  ],
+    {required: true, message: '请输入用户名', trigger: 'blur'},],
   password: [
-    {required: true, message: '请输入密码', trigger: 'blur'},
-
-  ],
+    {required: true, message: '请输入密码', trigger: 'blur'},],
   confirmPassword: [
-    {required: true, message: '请输入确认密码', trigger: 'blur'},
-
-  ],
+    {required: true, message: '请输入确认密码', trigger: 'blur'},],
   captcha: [
-    {required: true, message: '请输入验证码', trigger: 'blur'},
-  ],
+    {required: true, message: '请输入验证码', trigger: 'blur'},],
   role: [
-    {required: true, message: '请选择角色', trigger: 'blur'},
-  ],
-})
+    {required: true, message: '请选择角色', trigger: 'blur'},],
+}
 const flag = ref(true);
 const mySwitch = () => {
   const pre_box = document.querySelector('.pre-box')

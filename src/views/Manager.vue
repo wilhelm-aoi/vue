@@ -93,7 +93,7 @@ const logout =()=>{
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item @click.native="router.push('person')">个人信息</el-dropdown-item>
-                <el-dropdown-item>修改密码</el-dropdown-item>
+                <el-dropdown-item @click.native="router.push('password')">修改密码</el-dropdown-item>
                 <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
                 <el-dropdown-item disabled>Action 4</el-dropdown-item>
                 <el-dropdown-item divided>Action 5</el-dropdown-item>
