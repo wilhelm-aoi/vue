@@ -6,11 +6,11 @@ const routes = [
     path: '/',
     redirect: '/login2',  // 将根路径重定向到 /login
   },
-  {
-    path: '/:pathMatch(.*)*',  // 通配所有未匹配到的路由
-    name: '404',
-    component: () => import('../views/error/404.vue')
-  },
+  // {
+  //   path: '/:pathMatch(.*)*',  // 通配所有未匹配到的路由
+  //   name: '404',
+  //   component: () => import('../views/error/404.vue')
+  // },
 
   {
     path: '/login',

@@ -3,6 +3,7 @@ import axios from "@/axios/axios";
 import {ElMessage} from "element-plus";
 import {reactive} from 'vue'
 
+const apiUrl =import.meta.env.VITE_API_BASE_URL;
 const user = reactive(JSON.parse(localStorage.getItem('honey-user') || '{}'));
 const handleAvatarSuccess = (response, file, fileList) => {
   console.log(response, file, fileList)
@@ -30,7 +31,7 @@ axios.put("/user/update",user).then(res =>{
   align-items: center; /* 垂直居中 */">
       <el-upload
           class="avatar-uploader"
-          action="http://localhost:9090/file/upload"
+          :action="`${apiUrl}/file/upload`"
           :headers="{token:user.token}"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
