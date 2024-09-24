@@ -66,7 +66,7 @@ axios.put("/user/update",user).then(res =>{
 </template>
 
 <style scoped>
-/deep/.el-form-item__label {
+:deep(.el-form-item__label){
   font-weight: bold;
 }
 

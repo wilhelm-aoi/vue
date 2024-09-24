@@ -153,9 +153,6 @@ const options = Array.from({ length: 10000 }).map((_, idx) => ({
   text-align: center;
   height: 80vh;
 
-
-
-  //min-height: 100vh; /* 确保行的高度为视口高度的 100% */
 }
 
 .el-col {

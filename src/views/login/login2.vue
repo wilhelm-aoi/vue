@@ -405,8 +405,7 @@ const register = () => {
 
 /* 标题盒子 */
 .title-box {
-  //height: 200px;
-  //line-height: 300px;
+
 }
 
 /* 标题 */
@@ -432,11 +431,7 @@ const register = () => {
   width: 65%;
   flex: 1;
   display: flex;
-  //padding: 20px;
-  //background-color: rgba(255, 255, 255, 0.3); /* 半透明背景 */
-  //border-radius: 24px;
-  //backdrop-filter: blur(10px); /* 磨砂效果 */
-  //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 增加阴影效果 */
+
 }
 
 
@@ -445,7 +440,7 @@ const register = () => {
   width: 100%; /* 确保输入框占满父容器 */
   height: 50px;
   outline: none;
-  //margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   padding: 2px; /* 使用 padding 代替 text-indent，更符合规范 */
   border: 1px solid rgba(255, 255, 255, 0.5); /* 设置透明边框以增强磨砂效果 */
   background-color: rgba(255, 255, 255, 0.3); /* 透明背景色 */

@@ -137,7 +137,7 @@ const logout =()=>{
 
 /* 菜单项悬停样式 */
 .el-menu-item:hover,
-/deep/ .el-sub-menu__title:hover {
+:deep(.el-sub-menu__title:hover){
   color: #fff !important;
   background-color: #001529 !important;
   font-weight: bold;
@@ -145,7 +145,7 @@ const logout =()=>{
 
 /* el-icon的hover效果 */
 .el-menu-item:hover .el-icon,
-/deep/ .el-sub-menu__title:hover .el-icon {
+:deep(.el-sub-menu__title:hover .el-icon)  {
   color: #fff !important;
 }
 
